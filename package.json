@@ -1,5 +1,6 @@
 {
-  "name": "anuragi-tv",
+  "name": "plutus",
+  "description": "simple streaming website"
   "version": "0.1.0",
   "private": true,
   "scripts": {
