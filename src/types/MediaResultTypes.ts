@@ -1,0 +1,58 @@
+type Translation = {
+  description: string;
+  language: string;
+};
+type Logo = {
+  url: string;
+  aspectRatio: number;
+  width: number;
+};
+type Trailer = {
+  id: string;
+  site: string; // e.g., "YouTube"
+  url: string;
+};
+type Character = {
+  id: number;
+  name: string;
+  url: string;
+  character: string;
+  image: string;
+};
+type Mappings = {
+  imdb: string;
+  tmdb: number;
+};
+type SimilarOrRecommendation = {
+  id: number;
+  title: string;
+  image: string;
+  type: string;
+  rating: number;
+  releaseDate: string;
+};
+
+
+export type MediaResult = {
+  id: string;
+  title: string;
+  episodeId: string;
+  type: string;
+  rating: number;
+  releaseDate: string;
+  description: string;
+  image: string;
+  cover: string;
+  logos: Logo[];
+  genres: string[];
+  translations: Translation[];
+  duration: number; // in minutes
+  directors: string[];
+  writers: string[];
+  actors: string[];
+  characters: Character[];
+  trailer: Trailer;
+  mappings: Mappings;
+  similar: SimilarOrRecommendation[];
+  recommendations: SimilarOrRecommendation[];
+};

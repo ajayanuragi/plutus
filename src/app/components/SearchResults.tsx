@@ -14,9 +14,11 @@ export default function SearchResults({ data }: { data: DataProp }) {
         {data.results.slice(0, 5).map(result => (
           <SearchResultItem result={result} key={result.id} />
         ))}
-        <Link href={'/browse'} className="px-2 py-4 text-amber-800 text-center">
-          All Results...
-        </Link>
+        {data.results &&
+          <Link href={'/browse'} className="px-2 py-4 text-amber-800 text-center">
+            All Results...
+          </Link>
+        }
       </div>
 
 

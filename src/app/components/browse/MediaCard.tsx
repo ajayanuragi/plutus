@@ -3,10 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function MediaCard({ result }: { result: ResultProp }) {
+  const type = result.type === "TV Series" ? "tv" :
+    result.type === "Movie" ? "movie" :
+      result.type;
   return (
-    <Link href={`/about/${result.id}`}>
+    <Link href={`/about/${type}/${result.id}`}>
       <div className="hover:scale-105">
-        <Image src={result.image} alt={result.title} height={350} width={200} className="w-full h-96 rounded-xl" />
+        <Image src={result.image} alt={result.title} height={350} width={200} className="w-full h-96  rounded-xl" />
         <div className="flex flex-col">
           <h1 className="truncate my-1">{result.title}</h1>
           <div className="flex flex-row items-center justify-between text-xs text-black/70 dark:text-white/50">

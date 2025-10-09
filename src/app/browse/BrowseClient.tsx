@@ -39,7 +39,7 @@ export default function BrowseClient() {
   }, [page, debouncedValue, setData, setKeyword])
 
   return (
-    <div className="px-16 py-8">
+    <div className="px-8 py-8 md:px-16">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl mb-4">Browse All</h1>
         <p className="text-orange-700">{data?.totalResults} results</p>
