@@ -1,5 +1,9 @@
-export default function BrowsePage() {
+import BrowseClient from "./BrowseClient";
+
+export default function Browse() {
   return (
-    <h1>Browse All</h1>
+    <main>
+      <BrowseClient />
+    </main>
   )
 }
