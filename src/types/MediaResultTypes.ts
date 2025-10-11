@@ -33,6 +33,31 @@ type SimilarOrRecommendation = {
 };
 
 
+type Episode = {
+  id: string;
+  title: string;
+  episode: number;
+  season: number;
+  releaseDate: string; // ISO date string
+  description: string;
+  url: string;
+  img: {
+    mobile: string;
+    hd: string;
+  };
+};
+
+type Season = {
+  season: number;
+  image: {
+    mobile: string;
+    hd: string;
+  };
+  isReleased: boolean;
+  episodes: Episode[];
+};
+
+
 export type MediaResult = {
   id: string;
   title: string;
@@ -53,6 +78,8 @@ export type MediaResult = {
   characters: Character[];
   trailer: Trailer;
   mappings: Mappings;
+  totalSeasons?: number,
   similar: SimilarOrRecommendation[];
   recommendations: SimilarOrRecommendation[];
+  seasons?: Season[];
 };
