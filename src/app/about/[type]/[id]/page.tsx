@@ -28,7 +28,6 @@ export default async function AboutPage({ params }: PageProps) {
         <Image src={data.cover} alt={data.title} width={1000} height={1000} className="w-full h-screen relative brightness-70" />
         <div className="md:px-16 bottom-0 text-white tracking-wide absolute left-0 right-0 bg-gradient-to-t from-black to-transparent py-20">
           {data?.logos.length > 0 ? (
-
             <Image src={data?.logos[0].url} alt={data.title} width={data.logos[0].width} height={1000} className="h-auto w-md" />
           ) : <h1 className="text-6xl">{data.title}</h1>
           }
@@ -42,7 +41,7 @@ export default async function AboutPage({ params }: PageProps) {
             ))}
           </div>
           <p className="font-sans line-clamp-3 text-lg max-w-2xl text-ellipsis mb-4">{data.description}</p>
-          <Link href={data.seasons ? `/watch/tv/${id}/${1}` : `/watch/${id}`} className="bg-amber-700 text-white cursor-pointer px-4 py-2">Watch Now</Link>
+          <Link href={data.seasons ? `/watch/${id}/1/1` : `/watch/${id}`} className="bg-amber-700 text-white cursor-pointer px-4 py-2">Watch Now</Link>
         </div>
       </div>
       {
@@ -54,7 +53,7 @@ export default async function AboutPage({ params }: PageProps) {
                 <Link key={season.season} href={`/about/tv/${id}/${season.season}`}>
                   <div className="my-5">
                     <p>{season.season}</p>
-                    <Image src={season.image.hd} height={350} width={300} alt={"Image could not load"} className="w-full h-auto rounded" />
+                    <Image src={season?.image?.hd} height={350} width={300} alt={"Image could not load"} className="w-full h-auto rounded" />
                   </div>
                 </Link>
               ))}

@@ -8,12 +8,11 @@ export default function SearchResultItem({ result }: { result: ResultProp }) {
       result.type;
   return (
     <Link href={`/about/${type}/${result.id}`}>
-      <div className="px-5 py-2 mt-2 flex gap-2 shadow-xs rounded-xs not-dark:bg-gray-100 dark: bg-gray-700 items-center">
-        <Image src={result.image} className="h-16 w-16" alt={result.title} width={1024} height={1024} />
-        <div className="flex flex-col">
-          <div> <p className="text-lg">{result.title}</p></div>
-
-          <div className="flex items-center gap-2 text-xs">
+      <div className="mt-2 px-2">
+        <Image src={result.image} className="h-96 w-full rounded-xl" alt={result.title} width={1024} height={1024} />
+        <div className="py-2">
+          <div> <p className="text-lg line-clamp-1">{result.title}</p></div>
+          <div className="flex items-center justify-between gap-2 text-xs">
             <p className="border-amber-700">{result.type.toLocaleUpperCase()}</p>
             <p>{result.releaseDate}</p>
           </div>

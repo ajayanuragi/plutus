@@ -40,6 +40,12 @@ export default function BrowseClient() {
 
   return (
     <div className="px-8 py-8 md:px-16">
+      <div className="flex max-w-2xl flex-col mx-auto my-0 gap-2 items-center">
+        <h1 className="text-6xl text-center">
+          Find your next favourite movie or show
+        </h1>
+        <input value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder={'Search movie or tv show...'} className="shadow w-1/2 px-4 py-2 " />
+      </div>
       <div className="flex items-center justify-between">
         <h1 className="text-3xl mb-4">Browse All</h1>
         <p className="text-orange-700">{data?.totalResults} results</p>

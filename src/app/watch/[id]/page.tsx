@@ -12,7 +12,7 @@ export default async function WatchMovie({ params }: PageProps) {
     <div className="max-h-screen">
       <iframe
         src={`${api}/movie/${id}?color=c2410c&autoPlay=true`}
-        width="100%"
+        width="50%"
         allowFullScreen
         className="h-screen w-screen relative"
       />

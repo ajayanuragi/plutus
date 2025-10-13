@@ -1,12 +1,11 @@
-import { SetStateAction } from "jotai/ts3.8/esm/vanilla";
-import { Dispatch } from "react";
+import Link from "next/link";
 
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
-  setPage: Dispatch<SetStateAction<number>>;
+  type: string
 }
-export default function Pagination({ totalPages, setPage, currentPage }: PaginationProps) {
+export default function Pagination({ totalPages, currentPage, type }: PaginationProps) {
   const visiblePages = 5;
 
   const getPageNumbers = () => {
@@ -27,35 +26,38 @@ export default function Pagination({ totalPages, setPage, currentPage }: Paginat
     return pages;
   };
 
+  const createPageLink = (page: number) => `?type=${type}&page=${page}`
+
+  const disabledClass = "opacity-50 pointer-events-none cursor-not-allowed";
 
   return (
     <div className="flex items-center justify-center gap-2 mt-4">
-      <button onClick={() => setPage(1)} className="cursor-pointer"
-        disabled={currentPage === 1}>
+      <Link href={currentPage === 1 ? "#" : createPageLink(1)}
+        className={`px-2 ${currentPage === 1 ? disabledClass : "hover:underline"}`}
+        aria-disabled={currentPage === 1}>
         ⏮
-      </button>
-      <button onClick={() => setPage(currentPage - 1)} className="cursor-pointer"
-        disabled={currentPage === 1}>
+      </Link>
+      <Link href={createPageLink(Math.max(1, currentPage - 1))} className="cursor-pointer"
+        aria-disabled={currentPage === 1}>
         ◀
-      </button>
+      </Link>
       {getPageNumbers().map((page) => (
-        <button
+        <Link
           key={page}
-          onClick={() => setPage(page)}
-          className={`px-3 py-1 rounded ${page === currentPage ? "bg-orange-700 text-white" : "text-orange-700 bg-white"
-            }`}
+          href={createPageLink(page)}
+          className={`px-3 py-1 rounded ${page === currentPage ? "bg-orange-700 text-white" : "text-orange-700 bg-white"}`}
         >
           {page}
-        </button>
+        </Link>
       ))}
-      <button onClick={() => setPage(currentPage + 1)} className="cursor-pointer"
-        disabled={currentPage === totalPages}>
+      <Link href={createPageLink(Math.min(totalPages, currentPage + 1))} className="cursor-pointer"
+        aria-disabled={currentPage === totalPages}>
         ▶
-      </button>
-      <button onClick={() => setPage(totalPages)} className="cursor-pointer"
-        disabled={currentPage === totalPages}>
+      </Link>
+      <Link href={createPageLink(totalPages)} className="cursor-pointer"
+        aria-disabled={currentPage === totalPages}>
         ⏭
-      </button>
+      </Link>
     </div>
   )
 }

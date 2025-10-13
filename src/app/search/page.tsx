@@ -2,7 +2,7 @@ import BrowseClient from "./BrowseClient";
 
 export default function Browse() {
   return (
-    <main>
+    <main className="mt-20">
       <BrowseClient />
     </main>
   )

@@ -10,14 +10,11 @@ import Link from "next/link";
 
 export default function About() {
   const { id, season } = useParams() as { id: string; season: string };
-  console.log(id)
   const atomMedia = useAtomValue(latestMediaResult);
   const setMedia = useSetAtom(latestMediaResult);
-
   const [media, setLocalMedia] = useState<MediaResult | null>(atomMedia);
   const [loading, setLoading] = useState(!atomMedia);
   const [error, setError] = useState<string | null>(null);
-  console.log(atomMedia)
 
   useEffect(() => {
     if (!atomMedia || atomMedia.id !== id) {
@@ -38,7 +35,6 @@ export default function About() {
       fetchMedia();
     }
   }, [atomMedia, id, setMedia]);
-  console.log(atomMedia)
 
   if (loading) return <div className="p-4">Loading...</div>;
   if (error || !media) return <div className="text-red-500 p-4">{error || "Media not found."}</div>;
@@ -49,7 +45,7 @@ export default function About() {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 my-10">
       <h1 className="text-3xl font-bold">{media.title}</h1>
       <p className="text-gray-700 mb-2">Season {season}</p>
       <div className="flex items justify-between px-8">
@@ -62,13 +58,13 @@ export default function About() {
         {selectedSeason.episodes.filter((episode) => {
           const today = new Date();
           const releaseDate = new Date(episode.releaseDate);
-          return releaseDate <= today; 
+          return releaseDate <= today;
         }).map((episode) => (
           <Link href={`/watch/${id}/${season}/${episode.episode}`} key={episode.episode}>
             <div>
               {episode?.img?.hd ? (
                 <Image
-                  src={episode.img.hd}
+                  src={episode?.img?.hd}
                   height={300}
                   width={450}
                   className="h-auto rounded-xl w-full aspect-auto"
@@ -80,12 +76,12 @@ export default function About() {
                   {episode.releaseDate}
                 </div>
               )}
-              
+
               <div className="p-2 shadow rounded">
-              <h3 className="text-md font-bold my-2 line-clamp-2">
-                Episode {episode.episode}: {episode.title}
-              </h3>
-              <p className="text-sm text-gray-600">{episode.releaseDate}</p>
+                <h3 className="text-md font-bold my-2 line-clamp-2">
+                  Episode {episode.episode}: {episode.title}
+                </h3>
+                <p className="text-sm text-gray-600">{episode.releaseDate}</p>
               </div>
             </div>
           </Link>
