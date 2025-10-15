@@ -22,7 +22,7 @@ export default async function Home() {
             result.type === 'TV Series' && (
               <Link href={`/about/tv/${result.id}`} key={result.id} className="last:mb-5">
                 <div className="flex flex-col">
-                  <Image src={result.image} width={300} height={350} alt={result.title} className="w-96 h-full rounded-xl" />
+                  <Image src={result.image} width={300} height={350} alt={result.title} className="w-full h-96 rounded-xl" />
                   <div>
                     <h1 className="line-clamp-1 text-lg mt-2 mb-1">
                       {result.title}
@@ -48,7 +48,7 @@ export default async function Home() {
             result.type === 'Movie' && (
               <Link href={`/about/movie/${result.id}`} key={result.id} className="last:mb-5">
                 <div className="flex flex-col">
-                  <Image src={result.image} width={300} height={350} alt={result.title} className="w-96 h-full rounded-xl" />
+                  <Image src={result.image} width={300} height={350} alt={result.title} className="w-full h-96 rounded-xl" />
                   <h1 className="line-clamp-1">
                     {result.title}
                   </h1>

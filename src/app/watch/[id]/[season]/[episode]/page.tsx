@@ -34,21 +34,20 @@ export default async function WatchEpisode({ params }: PageProps) {
           allowFullScreen
           className="w-full h-150 ml-20 relative my-10 rounded-xl"
         />
-        <div className="flex flex-col gap-2 px-8 w-1/3">
-          <h1 className="px-8">
-            {result.title}
-          </h1>
+        {/*<div className="">
           {selectedSeason?.episodes.map(episode => (
-            <Link key={episode.id} href={`/watch/${id}/${selectedSeason.season}/${episode.episode}`}>
-              <div className="flex gap-2 flex-col">
-
-                <Image src={episode?.img?.hd} alt={episode.title} height={100} width={100} className="h-36 w-full aspect-video rounded-xl" />
-                <h1 className="mb-2">{episode.episode} - {episode.title}</h1>
+            <Link key={episode.episode} href={`/watch/${id}/${selectedSeason.season}/${episode.episode}`}>
+              <div className="grid grid-cols-6 gap-2">
+                <p className="px-1 py-1 border">
+                  {episode.episode}
+                </p>
+                
               </div>
+          
             </Link>
           ))}
 
-        </div>
+        </div>*/}
       </div>
       <Link href={`/about/tv/${id}/${season}`} className="absolute top-8 left-10">Back</Link>
     </div>
