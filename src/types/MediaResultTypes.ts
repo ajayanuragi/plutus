@@ -7,12 +7,12 @@ type Logo = {
   aspectRatio: number;
   width: number;
 };
-type Trailer = {
+export type Trailer = {
   id: string;
   site: string; // e.g., "YouTube"
   url: string;
 };
-type Character = {
+export type Character = {
   id: number;
   name: string;
   url: string;

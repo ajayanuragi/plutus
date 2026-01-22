@@ -45,47 +45,111 @@ export default function About() {
   }
 
   return (
-    <div className="p-6 my-10">
-      <h1 className="text-3xl font-bold">{media.title}</h1>
-      <p className="text-gray-700 mb-2">Season {season}</p>
-      <div className="flex items justify-between px-8">
-        <p className="text-gray-500 mb-6 max-w-xl">{media.description}</p>
-        <Image src={selectedSeason?.image?.hd} alt={media.title} width={350} height={500} className="w-auto h-96 rounded-2xl" />
-      </div>
+    <div className="min-h-screen bg-[#1f2937] text-white">
+      {/* Cinematic Hero Section for Season */}
+      <section className="relative h-[60vh] w-full overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={selectedSeason?.image?.hd || media.cover}
+            alt={`${media.title} - Season ${season}`}
+            fill
+            priority
+            className="object-cover object-top opacity-60 brightness-75"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1f2937] via-[#1f2937]/40 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#1f2937] to-transparent" />
+        </div>
 
-      <h2 className="text-2xl font-semibold mb-4">Episodes</h2>
-      <div className="grid gap-6 grid-cols-5">
-        {selectedSeason.episodes.filter((episode) => {
-          const today = new Date();
-          const releaseDate = new Date(episode.releaseDate);
-          return releaseDate <= today;
-        }).map((episode) => (
-          <Link href={`/watch/${id}/${season}/${episode.episode}`} key={episode.episode}>
-            <div>
-              {episode?.img?.hd ? (
-                <Image
-                  src={episode?.img?.hd}
-                  height={300}
-                  width={450}
-                  className="h-auto rounded-xl w-full aspect-auto"
-                  alt={`Thumbnail for ${episode.title}`}
-                  loading="lazy"
-                />
-              ) : (
-                <div className="flex items-center justify-center aspect-video bg-gray-200 text-center text-sm text-gray-600 rounded-xl">
-                  {episode.releaseDate}
-                </div>
-              )}
+        <div className="relative z-10 h-full flex flex-col justify-end px-8 md:px-16 pb-8 md:pb-12 max-w-7xl mx-auto">
+          <div className="space-y-6 max-w-4xl">
+            {media?.logos.length > 0 ? (
+              <Image
+                src={media?.logos[0].url}
+                alt={media.title}
+                width={400}
+                height={160}
+                className="h-auto max-w-[250px] md:max-w-[400px] drop-shadow-2xl"
+              />
+            ) : (
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight drop-shadow-lg leading-tight">
+                {media.title}
+              </h1>
+            )}
 
-              <div className="p-2 shadow rounded">
-                <h3 className="text-md font-bold my-2 line-clamp-2">
-                  Episode {episode.episode}: {episode.title}
-                </h3>
-                <p className="text-sm text-gray-600">{episode.releaseDate}</p>
+            <div className="flex flex-wrap items-center gap-6 text-lg font-medium">
+              <div className="px-4 py-1.5 bg-orange-600 rounded-full text-white font-bold shadow-lg shadow-orange-600/20">
+                Season {season}
+              </div>
+              <div className="flex items-center gap-2 text-gray-300">
+                <span>🗓️ {selectedSeason.episodes[0]?.releaseDate.split('-')[0] || "Unknown"}</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-300">
+                <span>🎬 {selectedSeason.episodes.length} Episodes</span>
               </div>
             </div>
-          </Link>
-        ))}
+
+            <p className="font-sans text-lg md:text-xl text-gray-200 max-w-3xl leading-relaxed line-clamp-2">
+              {media.description}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-8 space-y-16 py-16 relative z-20">
+        {/* Episodes Section */}
+        <section className="scroll-mt-24">
+          <div className="flex items-end justify-between mb-10 px-2 border-b border-orange-500/20 pb-4">
+            <div>
+              <h2 className="text-white text-3xl md:text-4xl font-bold tracking-tight">Episodes</h2>
+              <div className="h-1.5 w-24 bg-orange-600 mt-2 rounded-full shadow-lg shadow-orange-600/20" />
+            </div>
+          </div>
+
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {selectedSeason.episodes.filter((episode) => {
+              const today = new Date();
+              const releaseDate = new Date(episode.releaseDate);
+              return releaseDate <= today;
+            }).map((episode) => (
+              <Link
+                href={`/watch/${id}/${season}/${episode.episode}`}
+                key={episode.episode}
+                className="group flex flex-col space-y-3"
+              >
+                <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-gray-800 shadow-xl transition-all duration-300 group-hover:scale-[1.03] group-hover:shadow-orange-950/40">
+                  {episode?.img?.hd ? (
+                    <Image
+                      src={episode?.img?.hd}
+                      alt={`Episode ${episode.episode}`}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center bg-gray-800 text-gray-500">
+                      <span>No Thumbnail</span>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div className="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center shadow-lg shadow-orange-600/40 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <span className="text-white text-2xl ml-1">▶</span>
+                    </div>
+                  </div>
+                  <div className="absolute bottom-3 left-3 px-2 py-1 bg-black/60 backdrop-blur-md rounded text-xs font-bold text-white border border-white/10 uppercase tracking-widest">
+                    EP {episode.episode}
+                  </div>
+                </div>
+
+                <div className="px-1 space-y-1">
+                  <h3 className="text-lg font-bold text-gray-100 group-hover:text-orange-500 transition-colors line-clamp-1">
+                    {episode.title}
+                  </h3>
+                  <p className="text-sm text-gray-400 font-medium">{episode.releaseDate}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
