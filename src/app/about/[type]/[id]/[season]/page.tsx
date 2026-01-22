@@ -1,30 +1,25 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
-import { latestMediaResult } from "@/atoms/media";
 import { MediaResult } from "@/types/MediaResultTypes";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function About() {
   const { id, season } = useParams() as { id: string; season: string };
-  const atomMedia = useAtomValue(latestMediaResult);
-  const setMedia = useSetAtom(latestMediaResult);
-  const [media, setLocalMedia] = useState<MediaResult | null>(atomMedia);
-  const [loading, setLoading] = useState(!atomMedia);
+  const [media, setLocalMedia] = useState<MediaResult | null>(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!atomMedia || atomMedia.id !== id) {
+    if (id) {
       const fetchMedia = async () => {
         try {
           const res = await fetch(`/api/meta/info/${id}?type=tv`);
           if (!res.ok) throw new Error("Failed to fetch media");
           const data: MediaResult = await res.json();
           setLocalMedia(data);
-          setMedia(data); // Save back to atom
         } catch (error: unknown) {
           setError(`❌ Could not load media info., ${error}`);
         } finally {
@@ -34,7 +29,7 @@ export default function About() {
 
       fetchMedia();
     }
-  }, [atomMedia, id, setMedia]);
+  }, [id]);
 
   if (loading) return <div className="p-4">Loading...</div>;
   if (error || !media) return <div className="text-red-500 p-4">{error || "Media not found."}</div>;
@@ -46,14 +41,6 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-[#1f2937] text-white">
-      {/* Back Button */}
-      <Link
-        href={`/about/tv/${id}`}
-        className="fixed top-4 left-4 md:left-8 2xl:left-[calc(50%-336px-200px)] z-[60] flex items-center gap-2 px-4 py-2 bg-gray-900/80 backdrop-blur-md border border-white/10 rounded-full text-white font-medium hover:bg-orange-600 transition-all shadow-2xl shadow-black/50 group"
-      >
-        <span className="group-hover:-translate-x-1 transition-transform">←</span>
-        <span>Back to Show</span>
-      </Link>
 
       {/* Cinematic Hero Section for Season */}
       <section className="relative h-[60vh] w-full overflow-hidden">

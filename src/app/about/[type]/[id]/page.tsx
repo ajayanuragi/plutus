@@ -1,4 +1,3 @@
-import SetMediaAtomClient from "@/app/components/about/SetMediaAtomClient";
 import { MediaResult } from "@/types/MediaResultTypes";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,7 +31,6 @@ export default async function AboutPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-[#1f2937] text-white">
-      <SetMediaAtomClient media={data} />
 
       {/* Cinematic Hero Section */}
       <section className="relative h-[90vh] w-full overflow-hidden">

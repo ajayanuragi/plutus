@@ -27,14 +27,6 @@ export default async function WatchMovie({ params }: PageProps) {
     <div className="min-h-screen bg-[#1f2937] text-white pb-20">
       {/* Immersive Player Section */}
       <div className="relative pt-24 pb-12 px-4 md:px-8 max-w-[1400px] mx-auto">
-        {/* Back Button */}
-        <Link
-          href={`/about/movie/${id}`}
-          className="fixed top-4 left-4 md:left-8 2xl:left-[calc(50%-336px-200px)] z-[60] flex items-center gap-2 px-4 py-2 bg-gray-900/80 backdrop-blur-md border border-white/10 rounded-full text-white font-medium hover:bg-orange-600 transition-all shadow-2xl shadow-black/50 group"
-        >
-          <span className="group-hover:-translate-x-1 transition-transform">←</span>
-          <span>Back to Details</span>
-        </Link>
 
         {/* Player Container */}
         <VideoPlayer id={id} type="movie" />
