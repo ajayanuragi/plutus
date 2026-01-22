@@ -20,7 +20,7 @@ export default function About() {
     if (!atomMedia || atomMedia.id !== id) {
       const fetchMedia = async () => {
         try {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/info/${id}?type=tv`);
+          const res = await fetch(`/api/meta/info/${id}?type=tv`);
           if (!res.ok) throw new Error("Failed to fetch media");
           const data: MediaResult = await res.json();
           setLocalMedia(data);
@@ -46,6 +46,15 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-[#1f2937] text-white">
+      {/* Back Button */}
+      <Link
+        href={`/about/tv/${id}`}
+        className="fixed top-4 left-4 md:left-8 2xl:left-[calc(50%-336px-200px)] z-[60] flex items-center gap-2 px-4 py-2 bg-gray-900/80 backdrop-blur-md border border-white/10 rounded-full text-white font-medium hover:bg-orange-600 transition-all shadow-2xl shadow-black/50 group"
+      >
+        <span className="group-hover:-translate-x-1 transition-transform">←</span>
+        <span>Back to Show</span>
+      </Link>
+
       {/* Cinematic Hero Section for Season */}
       <section className="relative h-[60vh] w-full overflow-hidden">
         <div className="absolute inset-0 z-0">

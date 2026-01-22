@@ -2,9 +2,9 @@ import { MediaResult } from "@/types/MediaResultTypes";
 import Image from "next/image";
 import Link from "next/link";
 import SectionCarousel from "@/app/components/shared/SectionCarousel";
+import VideoPlayer from "@/app/components/watch/VideoPlayer";
 
-const backendApi = process.env.NEXT_PUBLIC_BACKEND_API;
-const api = process.env.NEXT_PUBLIC_STREAMING_API;
+const backendApi = process.env.BACKEND_API;
 
 interface PageProps {
   params: {
@@ -51,17 +51,7 @@ export default async function WatchEpisode({ params }: PageProps) {
         </Link>
 
         {/* Player Container */}
-        <div className="relative aspect-video w-full rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-white/5 bg-black group">
-          <iframe
-            src={`${api}/tv/${id}/${season}/${episode}?color=c2410c&autoPlay=true`}
-            width="100%"
-            height="100%"
-            allowFullScreen
-            className="absolute inset-0 w-full h-full"
-          />
-          {/* Subtle Ambient Glow */}
-          <div className="absolute -inset-1 bg-orange-600 opacity-5 blur-2xl pointer-events-none" />
-        </div>
+        <VideoPlayer id={id} type="tv" season={Number(season)} episode={Number(episode)} />
 
         {/* Metadata & Episode Selector Section */}
         <div className="mt-12 space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-700">

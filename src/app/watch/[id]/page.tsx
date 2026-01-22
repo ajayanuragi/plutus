@@ -1,6 +1,6 @@
 import { MediaResult } from "@/types/MediaResultTypes";
 import Link from "next/link";
-import Image from "next/image";
+import VideoPlayer from "@/app/components/watch/VideoPlayer";
 
 interface PageProps {
   params: {
@@ -8,8 +8,7 @@ interface PageProps {
   }
 }
 
-const api = process.env.NEXT_PUBLIC_STREAMING_API;
-const backendApi = process.env.NEXT_PUBLIC_BACKEND_API;
+const backendApi = process.env.BACKEND_API;
 
 export default async function WatchMovie({ params }: PageProps) {
   const { id } = await params;
@@ -38,17 +37,7 @@ export default async function WatchMovie({ params }: PageProps) {
         </Link>
 
         {/* Player Container */}
-        <div className="relative aspect-video w-full rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-white/5 bg-black group">
-          <iframe
-            src={`${api}/movie/${id}?color=c2410c&autoPlay=true`}
-            width="100%"
-            height="100%"
-            allowFullScreen
-            className="absolute inset-0 w-full h-full"
-          />
-          {/* Subtle Ambient Glow */}
-          <div className="absolute -inset-1 bg-orange-600 opacity-5 blur-2xl pointer-events-none" />
-        </div>
+        <VideoPlayer id={id} type="movie" />
 
         {/* Metadata Section */}
         {data && (

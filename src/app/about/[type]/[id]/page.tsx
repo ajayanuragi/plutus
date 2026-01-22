@@ -12,7 +12,7 @@ interface PageProps {
 
 export default async function AboutPage({ params }: PageProps) {
   const { id, type } = await params;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/info/${id}?type=${type}`, {
+  const res = await fetch(`${process.env.BACKEND_API}/info/${id}?type=${type}`, {
     next: { revalidate: 20000 },
   });
 

@@ -2,7 +2,7 @@ import Pagination from "@/app/components/Pagination";
 import { DataProp } from "@/types/SearchTypes";
 import Image from "next/image";
 import Link from "next/link";
-const api = process.env.NEXT_PUBLIC_BACKEND_API
+const api = process.env.BACKEND_API
 type TrendingPageProps = {
   params: { type: string };
   searchParams: { page?: string };

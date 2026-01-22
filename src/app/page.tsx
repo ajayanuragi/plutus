@@ -5,7 +5,7 @@ import MovieCard from "./components/shared/MovieCard";
 
 import SectionCarousel from "./components/shared/SectionCarousel";
 
-const api = process.env.NEXT_PUBLIC_BACKEND_API;
+const api = process.env.BACKEND_API;
 
 export default async function Home() {
   const response = await fetch(`${api}/trending`);
